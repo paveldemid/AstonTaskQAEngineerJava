@@ -19,7 +19,7 @@ public class Main {
 
         // Тестирование некорректного массива
         try {
-            Lesson12.arrayString(invalidArray);
+            Array.arrayString(invalidArray);
         } catch (MyArraySizeException e) {
             System.out.println(e.getMessage());
         } catch (MyArrayDataException e) {
@@ -28,7 +28,7 @@ public class Main {
 
         // Тестирование корректного массива
         try {
-            Lesson12.arrayString(validArray);
+            Array.arrayString(validArray);
         } catch (MyArraySizeException e) {
             System.out.println(e.getMessage());
         } catch (MyArrayDataException e) {

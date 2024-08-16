@@ -1,4 +1,4 @@
-public class Lesson12 {
+public class Array {
     public static void arrayString(String[][] array) {
         //Проверка размера массива.
         if (array.length != 4 || (array.length > 0 && array[0].length != 4)) {
@@ -22,14 +22,5 @@ public class Lesson12 {
     }
 }
 
-class MyArraySizeException extends RuntimeException {
-    public MyArraySizeException() {
-        super("Размер массива должен быть 4x4");
-    }
-}
 
-class MyArrayDataException extends RuntimeException {
-    public MyArrayDataException(int lines, int column, String[][] array) {
-        super("Ошибка преобразования в тип int. Строка " + lines + ". Столбец " + column + ". Элемент: " + array[lines][column]);
-    }
-}
+
