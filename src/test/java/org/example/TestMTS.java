@@ -37,7 +37,7 @@ public class TestMTS {
             closeCookies();
 
             //Поиск заголовка
-            WebElement header = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[contains(text(), 'Онлайн пополнение')]")));
+            WebElement header = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"pay-section\"]/div/div/div[2]/section/div/h2")));
             Assert.assertNotNull("Заголовок не найден!", header);
             System.out.println("Заголовок найден: " + header.getText());
 
