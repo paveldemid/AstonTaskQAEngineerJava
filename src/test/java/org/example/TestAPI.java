@@ -26,7 +26,7 @@ public class TestAPI {
         request.param("foo2", "bar2");
 
         // Отправка запроса
-        System.out.println("Отправка запроса");
+        System.out.println("Отправка GET-запроса");
         Response response = request.get("/get");
 
         // Проверка кода ответа
