@@ -11,8 +11,11 @@ import static org.hamcrest.Matchers.*;
 
 public class TestAPI {
 
+
     @Test
-    public void testRequest() {
+    public void testGetRequest() {
+
+        System.out.println("GET Request");
 
         // Базовый URL
         RestAssured.baseURI = "https://postman-echo.com";
@@ -46,7 +49,7 @@ public class TestAPI {
             response.then().body("headers.accept-encoding", equalTo("gzip,deflate"));
             response.then().body("url", equalTo("http://postman-echo.com/get?foo1=bar1&foo2=bar2"));
 
-            System.out.println("Успешно");
+            System.out.println("Успешно\n");
         } catch (AssertionError e) {
             logError(response);
             throw e; // Пробрасываем исключение дальше, чтобы тест не прошел
@@ -55,7 +58,9 @@ public class TestAPI {
 
 
     @Test
-    public void testPostRaw() {
+    public void testPostRawText() {
+
+        System.out.println("POST Raw Text");
 
         // Базовый URL
         RestAssured.baseURI = "https://postman-echo.com";
@@ -91,7 +96,7 @@ public class TestAPI {
             response.then().body("headers.accept-encoding", equalTo("gzip,deflate"));
             response.then().body("url", equalTo("http://postman-echo.com/post"));
 
-            System.out.println("Успешно");
+            System.out.println("Успешно\n");
 
         } catch (AssertionError e) {
             logError(response);
@@ -102,6 +107,8 @@ public class TestAPI {
 
     @Test
     public void testFormData() {
+
+        System.out.println("POST Form Data");
 
         // Базовый URL
         RestAssured.baseURI = "https://postman-echo.com";
@@ -153,7 +160,7 @@ public class TestAPI {
             response.then().body("headers.accept", equalTo("*/*"));
             response.then().body("headers.accept-encoding", equalTo("gzip,deflate"));
 
-            System.out.println("Успешно");
+            System.out.println("Успешно\n");
 
         } catch (AssertionError e) {
             logError(response);
@@ -164,6 +171,8 @@ public class TestAPI {
 
     @Test
     public void testPutRequest() {
+
+        System.out.println("PUT Request");
 
         // Базовый URL
         RestAssured.baseURI = "https://postman-echo.com";
@@ -203,7 +212,7 @@ public class TestAPI {
             response.then().body("headers.accept", equalTo("*/*"));
             response.then().body("headers.accept-encoding", equalTo("gzip,deflate"));
 
-            System.out.println("Успешно");
+            System.out.println("Успешно\n");
 
         } catch (AssertionError e) {
             logError(response);
@@ -212,7 +221,9 @@ public class TestAPI {
     }
 
     @Test
-    public void PatchRequest() {
+    public void testPatchRequest() {
+
+        System.out.println("PATCH Request");
 
         // Базовый URL
         RestAssured.baseURI = "https://postman-echo.com";
@@ -253,7 +264,7 @@ public class TestAPI {
             response.then().body("headers.accept", equalTo("*/*"));
             response.then().body("headers.accept-encoding", equalTo("gzip,deflate"));
 
-            System.out.println("Успешно");
+            System.out.println("Успешно\n");
 
         } catch (AssertionError e) {
             logError(response);
@@ -264,6 +275,8 @@ public class TestAPI {
 
     @Test
     public void testDeleteRequest() {
+
+        System.out.println("DELETE Request");
 
         // Базовый URL
         RestAssured.baseURI = "https://postman-echo.com";
@@ -299,7 +312,7 @@ public class TestAPI {
             response.then().body("headers.accept-encoding", equalTo("gzip,deflate"));
             response.then().body("headers.content-type", equalTo("application/json"));
 
-            System.out.println("Успешно");
+            System.out.println("Успешно\n");
 
         } catch (AssertionError e) {
             logError(response);
