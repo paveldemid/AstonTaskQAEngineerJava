@@ -5,6 +5,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -17,6 +18,20 @@ import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Step;
+import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import org.junit.jupiter.api.Assertions;
+
+import org.junit.jupiter.api.extension.ExtendWith;
+
+@ExtendWith(AllureTestWatcher.class)
 public class TestMTS {
     private WebDriver driver;
     private WebDriverWait wait;
@@ -29,15 +44,19 @@ public class TestMTS {
     }
 
 
-    //Проверка заголовка.
+    @Feature("Проверка заголовка")
     @Test
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Проверка наличие заголовка на главной странице")
     public void testFindHeader() {
         try {
+
             MtsPage mtsPage = new MtsPage(driver);
             Locators address = new Locators();
             Locators data = new Locators();
 
             driver.get("https://www.mts.by/");
+
             // Попытка закрыть куки
             closeCookies();
 
@@ -48,14 +67,15 @@ public class TestMTS {
 
         } catch (NoSuchElementException e) {
             e.printStackTrace();
-            Assert.fail("Элемент не найден: " + e.getMessage());
+            Assertions.fail("Элемент не найден: " + e.getMessage());
         } catch (TimeoutException e) {
-            Assert.fail("Таймаут ожилание элемента: " + e.getMessage());
+            Assertions.fail("Таймаут ожилание элемента: " + e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
-            Assert.fail("Тест не прошел из-за исключения: " + e.getMessage());
+            Assertions.fail("Тест не прошел из-за исключения: " + e.getMessage());
         }
     }
+
 
     //Проверка логотипов
     @Test
