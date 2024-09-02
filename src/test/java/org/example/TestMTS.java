@@ -30,9 +30,7 @@ public class TestMTS {
         driver.get("https://www.mts.by/");
         // Попытка закрыть куки
         closeCookies();
-
     }
-
 
     //Проверка заголовка.
     @Test
@@ -41,7 +39,6 @@ public class TestMTS {
             MtsPage mtsPage = new MtsPage(driver);
             Locators address = new Locators();
             Locators data = new Locators();
-
 
             System.out.println("Проверка заголовка: Онлайн пополнение без комиссии");
             Assert.assertTrue("Текст заголовка не найден " + mtsPage.getText(address.getAddressHeading()),
@@ -67,10 +64,12 @@ public class TestMTS {
             Locators address = new Locators();
             Locators data = new Locators();
 
-
-
             //Проверка иконок платёжных систем.
             List<WebElement> logos = mtsPage.getPaymentLogos(address.getAddressLogosPayOnline());
+
+            // Проверка количества логотипов
+            Assert.assertEquals("Количество логотипов не совпало с ожидаемым", data.expectedLogosPayOnline.size(), logos.size());
+
             // Проверяем наличие каждого ожидаемого логотипа
             for (String expectedLogo : data.expectedLogosPayOnline) {
                 boolean found = logos.stream().anyMatch(logoElement -> logoElement.getAttribute("src").endsWith(expectedLogo));
@@ -88,7 +87,6 @@ public class TestMTS {
     @Test
     public void testLink() {
         try {
-
             MtsPage mtsPage = new MtsPage(driver);
             Locators address = new Locators();
             Locators data = new Locators();
@@ -107,7 +105,6 @@ public class TestMTS {
 
             //Возврат на главную страницу.
             driver.navigate().back();
-
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Тест не прошел из-за исключения: " + e.getMessage());
@@ -117,9 +114,7 @@ public class TestMTS {
 
     @Test
     public void checkPlaceholder() {
-
         try {
-
             MtsPage mtsPage = new MtsPage(driver);
             Locators address = new Locators();
             Locators placeholder = new Locators();
@@ -149,7 +144,6 @@ public class TestMTS {
             Assert.assertTrue("Текст подсказки не содержит ожидаемого значения.",
                     mtsPage.getPlaceholder(address.getAddressFieldConnectionEmail()).contains(placeholder.getPlaceholderConnectionEmail()));
             System.out.println("Успешно");
-
 
             /*--------------------Домашний интернет--------------------------------*/
 
@@ -218,7 +212,6 @@ public class TestMTS {
                     mtsPage.getPlaceholder(address.getAddressFieldArrearsEmail()).contains(placeholder.getPlaceholderArrearsEmail()));
             System.out.println("Успешно");
 
-
         } catch (NoSuchElementException e) {
             e.printStackTrace();
             Assert.fail("Элемент не найден: " + e.getMessage());
@@ -234,15 +227,12 @@ public class TestMTS {
     @Test
     public void communicationServices() {
         try {
-
             MtsPage mtsPage = new MtsPage(driver);
             Locators placeholder = new Locators();
             Locators address = new Locators();
             Locators data = new Locators();
 
-
             System.out.println("Проверка варианта: Услуги связи");
-
 
             // Выбор пункта "Услуги связи"
             System.out.println("Выбор пункта: Услуги связи");
@@ -314,13 +304,16 @@ public class TestMTS {
 
             //Проверка иконок платёжных систем.
             List<WebElement> logos = mtsPage.getPaymentLogos(address.getAddressCardsBrands());
+
+            // Проверка количества логотипов
+            Assert.assertEquals("Количество логотипов не совпало с ожидаемым", data.expectedLogosBankСard.size(), logos.size());
+
             // Проверяем наличие каждого ожидаемого логотипа
             for (String expectedLogo : data.expectedLogosBankСard) {
                 boolean found = logos.stream().anyMatch(logoElement -> logoElement.getAttribute("src").endsWith(expectedLogo));
                 Assert.assertTrue("Логотип " + expectedLogo + " не найден!", found);
             }
             System.out.println("Тест пройден. Все изображения найдены.");
-
 
         } catch (NoSuchElementException e) {
             e.printStackTrace();
