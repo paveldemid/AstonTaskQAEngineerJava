@@ -1,11 +1,14 @@
 package org.example;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.*;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -17,19 +20,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
-
-import io.qameta.allure.Description;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
-import io.qameta.allure.Step;
-import io.qameta.allure.Description;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
-import org.junit.jupiter.api.Assertions;
-
-import org.junit.jupiter.api.extension.ExtendWith;
 
 @ExtendWith(AllureTestWatcher.class)
 public class TestMTS {
@@ -49,6 +39,9 @@ public class TestMTS {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Проверка наличие заголовка на главной странице")
     public void testFindHeader() {
+
+        Allure.step("Начало теста: Проверка заголовка: Онлайн пополнение без комиссии");
+
         try {
 
             MtsPage mtsPage = new MtsPage(driver);
@@ -65,21 +58,29 @@ public class TestMTS {
                     mtsPage.getText(address.getAddressHeading()).contains(data.getTextHeading()));
             System.out.println("Успешно. Заголовок найден: " + mtsPage.getText(address.getAddressHeading()));
 
+            Allure.step("Тест пройден");
+
         } catch (NoSuchElementException e) {
             e.printStackTrace();
-            Assertions.fail("Элемент не найден: " + e.getMessage());
+            Assert.fail("Элемент не найден: " + e.getMessage());
+            Allure.step("Ошибка: Элемент не найден" + e.getMessage());
         } catch (TimeoutException e) {
             Assertions.fail("Таймаут ожилание элемента: " + e.getMessage());
+            Allure.step("Ошибка: Таймаут ожилание элемента" + e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
-            Assertions.fail("Тест не прошел из-за исключения: " + e.getMessage());
+            Assert.fail("Тест не прошел из-за исключения: " + e.getMessage());
+            Allure.step("Ошибка: Тест не прошел из-за исключения:" + e.getMessage());
         }
     }
 
 
-    //Проверка логотипов
+    @Feature("Проверка логотипов")
     @Test
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Проверка иконок платёжных систем")
     public void testPaymentLogos() {
+        Allure.step("Начало работы теста:Проверка иконок платёжных систем");
         try {
             MtsPage mtsPage = new MtsPage(driver);
             Locators address = new Locators();
@@ -97,16 +98,21 @@ public class TestMTS {
                 Assert.assertTrue("Логотип " + expectedLogo + " не найден!", found);
             }
             System.out.println("Тест пройден. Все изображения найдены.");
+            Allure.step("Тест пройден");
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Тест не прошел из-за исключения: " + e.getMessage());
+            Allure.step("Ошибка: Тест не прошел из-за исключения"+e.getMessage());
         }
     }
 
 
-    //Проверка работы ссылки.
+    @Feature("Проверка работы ссылки")
     @Test
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Проверка работы ссылки: Подробнее о сервисе ")
     public void testLink() {
+        Allure.step("Начало работы теста:Проверка работы ссылки «Подробнее о сервисе» ");
         try {
 
             MtsPage mtsPage = new MtsPage(driver);
@@ -133,16 +139,20 @@ public class TestMTS {
             //Возврат на главную страницу.
             driver.navigate().back();
 
+            Allure.step("Тест пройден");
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Тест не прошел из-за исключения: " + e.getMessage());
+            Allure.step("Ошибка: Тест не прошел из-за исключения "+e.getMessage());
         }
     }
 
-
+    @Feature("Проверка placeholder для блока онлайн платежей")
     @Test
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Проверка надписей в незаполненных полях")
     public void checkPlaceholder() {
-
+        Allure.step("Начало работы теста: Проверка надписей в незаполненных полях");
         try {
 
             MtsPage mtsPage = new MtsPage(driver);
@@ -246,21 +256,29 @@ public class TestMTS {
                     mtsPage.getPlaceholder(address.getAddressFieldArrearsEmail()).contains(placeholder.getPlaceholderArrearsEmail()));
             System.out.println("Успешно");
 
+            Allure.step("Тест пройден");
 
         } catch (NoSuchElementException e) {
             e.printStackTrace();
             Assert.fail("Элемент не найден: " + e.getMessage());
+          Allure.step("Ошибка: Элемент не найден"+e.getMessage());
         } catch (TimeoutException e) {
             Assert.fail("Таймаут ожилание элемента: " + e.getMessage());
+            Allure.step("Ошибка:Таймаут ожилание элемента"+e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Тест не прошел из-за исключения: " + e.getMessage());
+            Allure.step("Ошибка: Тест не прошел из-за исключения"+e.getMessage());
         }
     }
 
-    //Тест варианта "Услуги связи".
+
+    @Feature("Тест варианта \"Услуги связи\"")
     @Test
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Проверка варианта: Услуги связи")
     public void communicationServices() {
+        Allure.step("Начало работы теста: Проверка варианта \"Услуги связи\"");
         try {
 
             MtsPage mtsPage = new MtsPage(driver);
@@ -351,15 +369,18 @@ public class TestMTS {
             }
             System.out.println("Тест пройден. Все изображения найдены.");
 
-
+            Allure.step("Тест пройден");
         } catch (NoSuchElementException e) {
             e.printStackTrace();
             Assert.fail("Элемент не найден: " + e.getMessage());
+            Allure.step("Ошибка: Элемент не найден"+e.getMessage());
         } catch (TimeoutException e) {
             Assert.fail("Таймаут ожилание элемента: " + e.getMessage());
+            Allure.step("Ошибка: Таймаут ожилание элемента" +e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Тест не прошел из-за исключения: " + e.getMessage());
+            Allure.step("Ощибка: Тест не прошел из-за исключения"+e.getMessage());
         }
     }
 
