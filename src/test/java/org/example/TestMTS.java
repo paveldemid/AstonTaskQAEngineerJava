@@ -26,6 +26,11 @@ public class TestMTS {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(100));
+
+        driver.get("https://www.mts.by/");
+        // Попытка закрыть куки
+        closeCookies();
+
     }
 
 
@@ -37,9 +42,6 @@ public class TestMTS {
             Locators address = new Locators();
             Locators data = new Locators();
 
-            driver.get("https://www.mts.by/");
-            // Попытка закрыть куки
-            closeCookies();
 
             System.out.println("Проверка заголовка: Онлайн пополнение без комиссии");
             Assert.assertTrue("Текст заголовка не найден " + mtsPage.getText(address.getAddressHeading()),
@@ -65,9 +67,7 @@ public class TestMTS {
             Locators address = new Locators();
             Locators data = new Locators();
 
-            driver.get("https://www.mts.by/");
-            // Попытка закрыть куки
-            closeCookies();
+
 
             //Проверка иконок платёжных систем.
             List<WebElement> logos = mtsPage.getPaymentLogos(address.getAddressLogosPayOnline());
@@ -93,12 +93,7 @@ public class TestMTS {
             Locators address = new Locators();
             Locators data = new Locators();
 
-            driver.get("https://www.mts.by/");
             System.out.println("Проверка работы ссылки «Подробнее о сервисе» ");
-
-            // Попытка закрыть куки
-            closeCookies();
-
 
             // Проверка наличия ссылки и клик по ней
             Assert.assertTrue("Ссылка 'Подробнее о сервисе' не найдена!", mtsPage.isMoreInfoLinkPresent(address.getLink()));
@@ -129,11 +124,8 @@ public class TestMTS {
             Locators address = new Locators();
             Locators placeholder = new Locators();
 
-            driver.get("https://www.mts.by/");
             System.out.println("Проверка надписей в незаполненных полях");
 
-            // Попытка закрыть куки
-            closeCookies();
 
             /* ----------------------------Услуги связи-------------------------------------------------*/
 
@@ -248,11 +240,9 @@ public class TestMTS {
             Locators address = new Locators();
             Locators data = new Locators();
 
-            driver.get("https://www.mts.by/");
+
             System.out.println("Проверка варианта: Услуги связи");
 
-            // Попытка закрыть куки
-            closeCookies();
 
             // Выбор пункта "Услуги связи"
             System.out.println("Выбор пункта: Услуги связи");
