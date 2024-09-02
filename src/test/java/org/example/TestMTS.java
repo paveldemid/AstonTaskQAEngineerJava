@@ -26,6 +26,10 @@ public class TestMTS {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(100));
+
+        driver.get("https://www.mts.by/");
+        // Попытка закрыть куки
+        closeCookies();
     }
 
 
@@ -36,10 +40,6 @@ public class TestMTS {
             MtsPage mtsPage = new MtsPage(driver);
             Locators address = new Locators();
             Locators data = new Locators();
-
-            driver.get("https://www.mts.by/");
-            // Попытка закрыть куки
-            closeCookies();
 
             System.out.println("Проверка заголовка: Онлайн пополнение без комиссии");
             Assert.assertTrue("Текст заголовка не найден " + mtsPage.getText(address.getAddressHeading()),
@@ -65,17 +65,18 @@ public class TestMTS {
             Locators address = new Locators();
             Locators data = new Locators();
 
-            driver.get("https://www.mts.by/");
-            // Попытка закрыть куки
-            closeCookies();
-
             //Проверка иконок платёжных систем.
             List<WebElement> logos = mtsPage.getPaymentLogos(address.getAddressLogosPayOnline());
+
+            //Проверка количества логотипов
+            Assert.assertEquals("Количество логотипов не совпало с ожидаемым", data.expectedLogosPayOnline.size(), logos.size());
+
             // Проверяем наличие каждого ожидаемого логотипа
             for (String expectedLogo : data.expectedLogosPayOnline) {
                 boolean found = logos.stream().anyMatch(logoElement -> logoElement.getAttribute("src").endsWith(expectedLogo));
                 Assert.assertTrue("Логотип " + expectedLogo + " не найден!", found);
             }
+
             System.out.println("Тест пройден. Все изображения найдены.");
         } catch (Exception e) {
             e.printStackTrace();
@@ -88,17 +89,11 @@ public class TestMTS {
     @Test
     public void testLink() {
         try {
-
             MtsPage mtsPage = new MtsPage(driver);
             Locators address = new Locators();
             Locators data = new Locators();
 
-            driver.get("https://www.mts.by/");
             System.out.println("Проверка работы ссылки «Подробнее о сервисе» ");
-
-            // Попытка закрыть куки
-            closeCookies();
-
 
             // Проверка наличия ссылки и клик по ней
             Assert.assertTrue("Ссылка 'Подробнее о сервисе' не найдена!", mtsPage.isMoreInfoLinkPresent(address.getLink()));
@@ -122,18 +117,12 @@ public class TestMTS {
 
     @Test
     public void checkPlaceholder() {
-
         try {
-
             MtsPage mtsPage = new MtsPage(driver);
             Locators address = new Locators();
             Locators placeholder = new Locators();
 
-            driver.get("https://www.mts.by/");
             System.out.println("Проверка надписей в незаполненных полях");
-
-            // Попытка закрыть куки
-            closeCookies();
 
             /* ----------------------------Услуги связи-------------------------------------------------*/
 
@@ -242,17 +231,12 @@ public class TestMTS {
     @Test
     public void communicationServices() {
         try {
-
             MtsPage mtsPage = new MtsPage(driver);
             Locators placeholder = new Locators();
             Locators address = new Locators();
             Locators data = new Locators();
 
-            driver.get("https://www.mts.by/");
             System.out.println("Проверка варианта: Услуги связи");
-
-            // Попытка закрыть куки
-            closeCookies();
 
             // Выбор пункта "Услуги связи"
             System.out.println("Выбор пункта: Услуги связи");
@@ -324,6 +308,10 @@ public class TestMTS {
 
             //Проверка иконок платёжных систем.
             List<WebElement> logos = mtsPage.getPaymentLogos(address.getAddressCardsBrands());
+
+            //Проверка количества логотипов
+            Assert.assertEquals("Количество логотипов не совпало с ожидаемым", data.expectedLogosBankСard.size(), logos.size());
+
             // Проверяем наличие каждого ожидаемого логотипа
             for (String expectedLogo : data.expectedLogosBankСard) {
                 boolean found = logos.stream().anyMatch(logoElement -> logoElement.getAttribute("src").endsWith(expectedLogo));

@@ -98,6 +98,8 @@ public class MtsPage {
         return phoneNumber;
     }
 
+
+    //Метод для поиска ссылки
     public boolean isMoreInfoLinkPresent(String address) {
         try {
             return driver.findElement(By.xpath(address)).isDisplayed();
@@ -106,6 +108,7 @@ public class MtsPage {
         }
     }
 
+    //Метод для перехода по ссылке.
     public void clickMoreInfoLink(String address) {
         WebElement moreInfoLink = driver.findElement(By.xpath(address));
         moreInfoLink.click();
