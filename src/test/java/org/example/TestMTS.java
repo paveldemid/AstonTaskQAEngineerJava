@@ -12,7 +12,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -120,7 +119,6 @@ public class TestMTS {
             Locators placeholder = new Locators();
 
             System.out.println("Проверка надписей в незаполненных полях");
-
 
             /* ----------------------------Услуги связи-------------------------------------------------*/
 
