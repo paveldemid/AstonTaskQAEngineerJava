@@ -31,6 +31,10 @@ public class TestMTS {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(100));
+
+        driver.get("https://www.mts.by/");
+        // Попытка закрыть куки
+        closeCookies();
     }
 
 
@@ -39,19 +43,11 @@ public class TestMTS {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Проверка наличие заголовка на главной странице")
     public void testFindHeader() {
-
         Allure.step("Начало теста: Проверка заголовка: Онлайн пополнение без комиссии");
-
         try {
-
             MtsPage mtsPage = new MtsPage(driver);
             Locators address = new Locators();
             Locators data = new Locators();
-
-            driver.get("https://www.mts.by/");
-
-            // Попытка закрыть куки
-            closeCookies();
 
             System.out.println("Проверка заголовка: Онлайн пополнение без комиссии");
             Assert.assertTrue("Текст заголовка не найден " + mtsPage.getText(address.getAddressHeading()),
@@ -59,7 +55,6 @@ public class TestMTS {
             System.out.println("Успешно. Заголовок найден: " + mtsPage.getText(address.getAddressHeading()));
 
             Allure.step("Тест пройден");
-
         } catch (NoSuchElementException e) {
             e.printStackTrace();
             Assert.fail("Элемент не найден: " + e.getMessage());
@@ -86,12 +81,12 @@ public class TestMTS {
             Locators address = new Locators();
             Locators data = new Locators();
 
-            driver.get("https://www.mts.by/");
-            // Попытка закрыть куки
-            closeCookies();
-
             //Проверка иконок платёжных систем.
             List<WebElement> logos = mtsPage.getPaymentLogos(address.getAddressLogosPayOnline());
+
+            // Проверка количества логотипов
+            Assert.assertEquals("Количество логотипов не совпало с ожидаемым", data.expectedLogosPayOnline.size(), logos.size());
+
             // Проверяем наличие каждого ожидаемого логотипа
             for (String expectedLogo : data.expectedLogosPayOnline) {
                 boolean found = logos.stream().anyMatch(logoElement -> logoElement.getAttribute("src").endsWith(expectedLogo));
@@ -114,17 +109,11 @@ public class TestMTS {
     public void testLink() {
         Allure.step("Начало работы теста:Проверка работы ссылки «Подробнее о сервисе» ");
         try {
-
             MtsPage mtsPage = new MtsPage(driver);
             Locators address = new Locators();
             Locators data = new Locators();
 
-            driver.get("https://www.mts.by/");
             System.out.println("Проверка работы ссылки «Подробнее о сервисе» ");
-
-            // Попытка закрыть куки
-            closeCookies();
-
 
             // Проверка наличия ссылки и клик по ней
             Assert.assertTrue("Ссылка 'Подробнее о сервисе' не найдена!", mtsPage.isMoreInfoLinkPresent(address.getLink()));
@@ -154,16 +143,11 @@ public class TestMTS {
     public void checkPlaceholder() {
         Allure.step("Начало работы теста: Проверка надписей в незаполненных полях");
         try {
-
             MtsPage mtsPage = new MtsPage(driver);
             Locators address = new Locators();
             Locators placeholder = new Locators();
 
-            driver.get("https://www.mts.by/");
             System.out.println("Проверка надписей в незаполненных полях");
-
-            // Попытка закрыть куки
-            closeCookies();
 
             /* ----------------------------Услуги связи-------------------------------------------------*/
 
@@ -280,17 +264,12 @@ public class TestMTS {
     public void communicationServices() {
         Allure.step("Начало работы теста: Проверка варианта \"Услуги связи\"");
         try {
-
             MtsPage mtsPage = new MtsPage(driver);
             Locators placeholder = new Locators();
             Locators address = new Locators();
             Locators data = new Locators();
 
-            driver.get("https://www.mts.by/");
             System.out.println("Проверка варианта: Услуги связи");
-
-            // Попытка закрыть куки
-            closeCookies();
 
             // Выбор пункта "Услуги связи"
             System.out.println("Выбор пункта: Услуги связи");
@@ -362,6 +341,10 @@ public class TestMTS {
 
             //Проверка иконок платёжных систем.
             List<WebElement> logos = mtsPage.getPaymentLogos(address.getAddressCardsBrands());
+
+            // Проверка количества логотипов
+            Assert.assertEquals("Количество логотипов не совпало с ожидаемым", data.expectedLogosBankСard.size(), logos.size());
+
             // Проверяем наличие каждого ожидаемого логотипа
             for (String expectedLogo : data.expectedLogosBankСard) {
                 boolean found = logos.stream().anyMatch(logoElement -> logoElement.getAttribute("src").endsWith(expectedLogo));
