@@ -42,7 +42,7 @@ public class TestMTS {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Проверка наличие заголовка на главной странице")
     public void testFindHeader() {
-        Allure.step("Начало теста: Проверка заголовка: <<Онлайн пополнение без комиссии>>");
+        Allure.step("Начало теста: Проверка заголовка \"Онлайн пополнение без комиссии\"");
         try {
             MtsPage mtsPage = new MtsPage(driver);
             Locators address = new Locators();
@@ -101,7 +101,7 @@ public class TestMTS {
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Проверка работы ссылки: Подробнее о сервисе ")
     public void testLink() {
-        Allure.step("Начало работы теста:Проверка работы ссылки «Подробнее о сервисе» ");
+        Allure.step("Начало работы теста: Проверка работы ссылки \"Подробнее о сервисе\"");
         try {
             MtsPage mtsPage = new MtsPage(driver);
             Locators address = new Locators();
@@ -147,37 +147,37 @@ public class TestMTS {
             mtsPage.clickSelector(address.getAddressSelector(), address.getAddressCommunicationServices());
 
             // Поля для ввода номера телефона.
-            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения." + placeholder.getPlaceholderConnectionPhone(),
+            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения: " + placeholder.getPlaceholderConnectionPhone(),
                     mtsPage.getPlaceholder(address.getAddressFieldConnectionPhone()).contains(placeholder.getPlaceholderConnectionPhone()));
 
             //Поля для ввода суммы платежа.
-            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения." + placeholder.getPlaceholderConnectionSum(),
+            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения: " + placeholder.getPlaceholderConnectionSum(),
                     mtsPage.getPlaceholder(address.getAddressFieldConnectionSum()).contains(placeholder.getPlaceholderConnectionSum()));
 
             //Поля для ввода email.
-            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения." + placeholder.getPlaceholderConnectionEmail(),
+            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения: " + placeholder.getPlaceholderConnectionEmail(),
                     mtsPage.getPlaceholder(address.getAddressFieldConnectionEmail()).contains(placeholder.getPlaceholderConnectionEmail()));
 
             /*--------------------Домашний интернет--------------------------------*/
             mtsPage.clickSelector(address.getAddressSelector(), address.getAddressHomeInternet());
 
             // Поля для ввода номера телефона.
-            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения." + placeholder.getPlaceholderInternetPhone(),
+            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения: " + placeholder.getPlaceholderInternetPhone(),
                     mtsPage.getPlaceholder(address.getAddressFieldInternetPhone()).contains(placeholder.getPlaceholderInternetPhone()));
 
             //Поля для ввода суммы платежа.
-            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения." + placeholder.getPlaceholderInternetSum(),
+            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения: " + placeholder.getPlaceholderInternetSum(),
                     mtsPage.getPlaceholder(address.getAddressFieldInternetSum()).contains(placeholder.getPlaceholderInternetSum()));
 
             //Поля для ввода email.
-            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения." + placeholder.getPlaceholderInternetEmail(),
+            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения: " + placeholder.getPlaceholderInternetEmail(),
                     mtsPage.getPlaceholder(address.getAddressFieldInternetEmail()).contains(placeholder.getPlaceholderInternetEmail()));
 
             /*--------------------Рассрочка--------------------------------*/
             mtsPage.clickSelector(address.getAddressSelector(), address.getAddressInstallment());
 
             // Поля для ввода номера счета.
-            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения." + placeholder.getPlaceholderInstallmentScore(),
+            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения: " + placeholder.getPlaceholderInstallmentScore(),
                     mtsPage.getPlaceholder(address.getAddressFieldInstallmentScore()).contains(placeholder.getPlaceholderInstallmentScore()));
 
             //Поля для ввода суммы.
@@ -185,7 +185,7 @@ public class TestMTS {
                     mtsPage.getPlaceholder(address.getAddressFieldInstallmentSum()).contains(placeholder.getPlaceholderInstallmentSum()));
 
             //Поля для ввода email.
-            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения." + placeholder.getPlaceholderInstallmentEmail(),
+            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения: " + placeholder.getPlaceholderInstallmentEmail(),
                     mtsPage.getPlaceholder(address.getAddressFieldInstallmentEmail()).contains(placeholder.getPlaceholderInstallmentEmail()));
 
 
@@ -193,15 +193,15 @@ public class TestMTS {
             mtsPage.clickSelector(address.getAddressSelector(), address.getAddressArrears());
 
             // Поля для ввода номера счета.
-            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения." + placeholder.getPlaceholderArrearsScore(),
+            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения: " + placeholder.getPlaceholderArrearsScore(),
                     mtsPage.getPlaceholder(address.getAddressFieldArrearsScore()).contains(placeholder.getPlaceholderArrearsScore()));
 
             //Поля для ввода суммы.
-            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения." + placeholder.getPlaceholderArrearsSum(),
+            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения: " + placeholder.getPlaceholderArrearsSum(),
                     mtsPage.getPlaceholder(address.getAddressFieldArrearsSum()).contains(placeholder.getPlaceholderArrearsSum()));
 
             //Поля для ввода email.
-            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения." + placeholder.getPlaceholderArrearsEmail(),
+            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения: " + placeholder.getPlaceholderArrearsEmail(),
                     mtsPage.getPlaceholder(address.getAddressFieldArrearsEmail()).contains(placeholder.getPlaceholderArrearsEmail()));
 
             Allure.step("Тест пройден");
@@ -266,28 +266,26 @@ public class TestMTS {
             System.out.println("Успешно" + " Номер телефона: " + mtsPage.getNumberPhone(address.getAddressNumberPhoneText()) + " совпадает c введенным: " + placeholder.getNumberPhone());
 
             //Проверка placeholder в полях для ввода данных номера карты
-            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения." + placeholder.getPlaceholderNumberCart(),
+            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения: " + placeholder.getPlaceholderNumberCart(),
                     mtsPage.getText(address.getAddressFieldNumberCart()).contains(placeholder.getPlaceholderNumberCart()));
 
             //Проверка placeholder в полях для ввода срока действия банковской карты
-            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения." + placeholder.getPlaceholderValidityPeriod(),
+            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения: " + placeholder.getPlaceholderValidityPeriod(),
                     mtsPage.getText(address.getAddressFieldValidityPeriod()).contains(placeholder.getPlaceholderValidityPeriod()));
-            System.out.println("Успешно");
 
             //Проверка placeholder в полях для ввода CVC банковской карты
-            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения." + placeholder.getPlaceholderCVC(),
+            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения: " + placeholder.getPlaceholderCVC(),
                     mtsPage.getText(address.getAddressFieldCVC()).contains(placeholder.getPlaceholderCVC()));
-            System.out.println("Успешно");
 
             //Проверка placeholder в полях для ввода имя держателя
-            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения." + placeholder.getPlaceholderUsername(),
+            Assert.assertTrue("Текст подсказки не содержит ожидаемого значения: " + placeholder.getPlaceholderUsername(),
                     mtsPage.getText(address.getAddressFieldUsername()).contains(placeholder.getPlaceholderUsername()));
 
             //Проверка иконок платёжных систем.
             List<WebElement> logos = mtsPage.getPaymentLogos(address.getAddressCardsBrands());
 
             // Проверка количества логотипов
-            Assert.assertEquals("Количество логотипов не совпало с ожидаемым", data.expectedLogosBankСard.size(), logos.size());
+            Assert.assertEquals("Количество логотипов не совпало с ожидаемым ", data.expectedLogosBankСard.size(), logos.size());
 
             // Проверяем наличие каждого ожидаемого логотипа
             for (String expectedLogo : data.expectedLogosBankСard) {
