@@ -42,7 +42,7 @@ public class TestMTS {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Проверка наличие заголовка на главной странице")
     public void testFindHeader() {
-        Allure.step("Начало теста: Проверка заголовка: Онлайн пополнение без комиссии");
+        Allure.step("Начало теста: Проверка заголовка: <<Онлайн пополнение без комиссии>>");
         try {
             MtsPage mtsPage = new MtsPage(driver);
             Locators address = new Locators();
@@ -70,7 +70,7 @@ public class TestMTS {
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Проверка иконок платёжных систем")
     public void testPaymentLogos() {
-        Allure.step("Начало работы теста:Проверка иконок платёжных систем");
+        Allure.step("Начало работы теста: Проверка иконок платёжных систем");
         try {
             MtsPage mtsPage = new MtsPage(driver);
             Locators address = new Locators();
